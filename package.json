@@ -1,0 +1,22 @@
+{
+  "name": "dictionary-cmd",
+  "version": "1.0.0",
+  "description": "A command line dictionary tool using words api.",
+  "main": "app/app.js",
+  "scripts": {
+    "build": "babel ./app --out-dir dist/ --copy-files",
+    "start": "npm run build && node dist/app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Gagan Lohia",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "commander": "^4.1.1",
+    "inquirer": "^7.0.6"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0"
+  }
+}
