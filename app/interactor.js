@@ -1,4 +1,4 @@
-import { prompt, Select } from "inquirer"
+import { prompt } from "inquirer"
 import colour from "colors";
 export default class Interactor {
     constructor(word, definations, antonym, synonym) {
@@ -6,7 +6,7 @@ export default class Interactor {
         this.definations = definations;
         this.antonym = antonym;
         this.synonym = synonym;
-        this.firstStatement = '\nGuess the word: '.blue;
+        this.firstStatement = '\n\nGuess the word: '.blue;
         this.choices = ['1. Try again','2. Give a hint','3. Quit'];
      }
     

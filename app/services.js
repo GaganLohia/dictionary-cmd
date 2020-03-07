@@ -41,9 +41,9 @@ export default class Services {
     }
 
     commonErrorCallback(err) {
-        var data = 'Some Error Occured!'.red;
+        var data = 'Some Error Occured!';
         if (err && err.response && err.response.status && err.response.status == 400) {
-            data = 'Word Not Found!'.red;
+            data = 'Word Not Found!';
         }
         return {
             success: false,

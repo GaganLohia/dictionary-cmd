@@ -32,3 +32,7 @@ if(process.argv.length<3){
 }
 
 commander.parse(process.argv);
+
+String.prototype.capitalize = function() {
+    return this.charAt(0).toUpperCase() + this.slice(1);
+}
