@@ -29,6 +29,18 @@ export default class Services {
         }
     }
 
+    async getRandomWord(){
+        try {
+            const res = await axios.get(`${Constants.HOST}/words/randomWord?api_key=${Constants.API_KEY}`)
+            return {
+                success: true,
+                data: res.data.word
+            };
+        } catch (err) {
+            return this.commonErrorCallback(err);
+        }
+    }
+
     commonErrorCallback(err) {
         var data = 'Some Error Occured!';
         if (err.response.status == 400) {

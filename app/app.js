@@ -21,10 +21,14 @@ commander
 
 commander
     .arguments("<word>")
-    .action((word) => console.log(word));
+    .action((word) => controller.showFullDict(word));
+
+commander
+    .command("play")
+    .action(controller.playGame);
 
 if(process.argv.length<3){
-    console.log("No Command");
+    controller.showRandomWordDict();
 }
 
 commander.parse(process.argv);
