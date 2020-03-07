@@ -4,7 +4,6 @@ import axios from "axios"
 export default class Services {
     constructor() { }
 
-    
     async getWordDefinations(word) {
         try {
             const res = await axios.get(`${Constants.HOST}/word/${word}/definitions?api_key=${Constants.API_KEY}`)
@@ -42,9 +41,9 @@ export default class Services {
     }
 
     commonErrorCallback(err) {
-        var data = 'Some Error Occured!';
+        var data = 'Some Error Occured!'.red;
         if (err && err.response && err.response.status && err.response.status == 400) {
-            data = 'Word Not Found!';
+            data = 'Word Not Found!'.red;
         }
         return {
             success: false,

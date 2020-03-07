@@ -13,8 +13,10 @@
   "dependencies": {
     "axios": "^0.19.2",
     "babel-polyfill": "^6.26.0",
+    "colors": "^1.4.0",
     "commander": "^4.1.1",
-    "inquirer": "^7.0.6"
+    "inquirer": "^7.0.6",
+    "install": "^0.13.0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",

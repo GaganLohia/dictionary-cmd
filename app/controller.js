@@ -1,4 +1,5 @@
 import Services from "./services"
+import Interactor from "./interactor"
 
 var ServicesController = new Services();
 export default class Controller{
@@ -39,6 +40,8 @@ export default class Controller{
         console.log(data);
         console.log(definations);
         console.log(relatedWords);
+        let interactor = new Interactor(data,definations,relatedWords,relatedWords);
+        interactor.playGame();
     }
 
 }
