@@ -4,8 +4,8 @@ import Interactor from "./interactor"
 var ServicesController = new Services();
 export default class Controller {
     constructor() {
-        this.synonyms = "synonym";
-        this.antonyms = "antonym";
+        this.synonym = "synonym";
+        this.antonym = "antonym";
         this.definations = "defination";
     }
 
@@ -24,8 +24,8 @@ export default class Controller {
     async showWordSynonyms(word) {
         let res = await ServicesController.getRelatedWords(word)
         if (res.success) {
-            let synonyms = this.formatRelatedWords(res, this.synonyms);
-            this.print(this.synonyms, synonyms);
+            let synonyms = this.formatRelatedWords(res, this.synonym);
+            this.print(this.synonym, synonyms);
         } else {
             this.printLine(res.data);
         }
@@ -34,8 +34,8 @@ export default class Controller {
     async showWordAntonyms(word) {
         let res = await ServicesController.getRelatedWords(word)
         if (res.success) {
-            let antonyms = this.formatRelatedWords(res, this.antonyms);
-            this.print(this.antonyms, antonyms);
+            let antonyms = this.formatRelatedWords(res, this.antonym);
+            this.print(this.antonym, antonyms);
         } else {
             this.printLine(res.data);
         }
@@ -45,10 +45,10 @@ export default class Controller {
         await this.showWordDefinations(word);
         let relatedWords = await ServicesController.getRelatedWords(word);
         if (relatedWords.success) {
-            let antonyms = this.formatRelatedWords(relatedWords, this.antonyms);
-            let synonyms = this.formatRelatedWords(relatedWords, this.synonyms);
-            this.print(this.synonyms, synonyms);
-            this.print(this.antonyms, antonyms);
+            let antonyms = this.formatRelatedWords(relatedWords, this.antonym);
+            let synonyms = this.formatRelatedWords(relatedWords, this.synonym);
+            this.print(this.synonym, synonyms);
+            this.print(this.antonym, antonyms);
         } else {
             this.printLine(res.data);
         }
@@ -75,17 +75,18 @@ export default class Controller {
             return item.text;
         });
         let relatedWords = await ServicesController.getRelatedWords(data);
+        var antonyms = [], synonyms = [];
         if (relatedWords.success) {
-            let antonyms = this.formatRelatedWords(relatedWords, this.antonyms);
-            let synonyms = this.formatRelatedWords(relatedWords, this.synonyms);
-            console.log(data);
-            console.log(definations);
-            console.log(antonyms);
-            console.log(synonyms);
-            let interactor = new Interactor(data, definations, relatedWords, relatedWords);
-            interactor.playGame();
+            relatedWords.data.forEach(item => {
+                if (item.relationshipType == "antonym") {
+                    antonyms = item.words;
+                }else if(item.relationshipType == "synonym"){
+                    synonyms = item.words;
+                }
+            });
         }
-
+        let interactor = new Interactor(data, definations, antonyms, synonyms);
+        interactor.playGame();
     }
 
     formatRelatedWords(res, type) {
