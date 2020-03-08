@@ -1,6 +1,9 @@
 import { prompt } from "inquirer"
 import colour from "colors";
 import Printer from "./printer"
+import Controller from "./controller"
+
+
 
 var printer = new Printer();
 export default class Interactor {
@@ -49,6 +52,9 @@ export default class Interactor {
                             this.printShuffledWord();
                     }
                 }else if(choice == 2){
+                    const controller = new Controller();
+                    printer.printLine(`\n\nWord is: `.blue + this.word.green);
+                    controller.showFullDict(this.word);
                     break;
                 }
             }

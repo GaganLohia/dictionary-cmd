@@ -59,13 +59,9 @@ export default class Controller {
 
     async showRandomWordDict() {
         let res = await ServicesController.getRandomWord();
-        if (res.success) {
-            let word = res.data;
-            printer.printLine(`\n\nWord of the day is: `.blue + word.green);
-            await this.showWordDefinations(word);
-            await this.showWordSynonyms(word);
-            await this.showWordAntonyms(word);
-        } else {
+        if(res.success){
+            await this.showFullDict(res.data);
+        }else{
             this.printLine(res.data);
         }
     }
@@ -82,7 +78,7 @@ export default class Controller {
             relatedWords.data.forEach(item => {
                 if (item.relationshipType == "antonym") {
                     antonyms = item.words;
-                }else if(item.relationshipType == "synonym"){
+                } else if (item.relationshipType == "synonym") {
                     synonyms = item.words;
                 }
             });
