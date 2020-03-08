@@ -19,8 +19,10 @@ export default class Controller {
                 return item.text;
             });
             this.print(this.definations, data);
+            return true;
         } else {
             this.printLine(res.data);
+            return false;
         }
     }
 
@@ -45,37 +47,39 @@ export default class Controller {
     }
 
     async showFullDict(word) {
-        await this.showWordDefinations(word);
-        let relatedWords = await ServicesController.getRelatedWords(word);
-        if (relatedWords.success) {
-            let antonyms = this.formatRelatedWords(relatedWords, this.antonym);
-            let synonyms = this.formatRelatedWords(relatedWords, this.synonym);
-            this.print(this.synonym, synonyms);
-            this.print(this.antonym, antonyms);
-        } else {
-            this.printLine(res.data);
+        let success = await this.showWordDefinations(word);
+        if (success) {
+            let relatedWords = await ServicesController.getRelatedWords(word);
+            if (relatedWords.success) {
+                let antonyms = this.formatRelatedWords(relatedWords, this.antonym);
+                let synonyms = this.formatRelatedWords(relatedWords, this.synonym);
+                this.print(this.synonym, synonyms);
+                this.print(this.antonym, antonyms);
+            } else {
+                this.printLine(res.data);
+            }
         }
 
     }
 
     async showRandomWordDict() {
         let res = await ServicesController.getRandomWord();
-        if(res.success){
+        if (res.success) {
             printer.printLine(`\n\nWord is: `.blue + res.data.green);
             await this.showFullDict(res.data);
-        }else{
+        } else {
             this.printLine(res.data);
         }
     }
 
-    async showExamples(word){
+    async showExamples(word) {
         let res = await ServicesController.getExamples(word);
-        if(res.success){
+        if (res.success) {
             var data = res.data.map(item => {
                 return item.text;
             });
             this.print(this.examples, data);
-        }else{
+        } else {
             this.printLine(res.data);
         }
     }
