@@ -9,6 +9,7 @@ export default class Controller {
         this.synonym = "synonym";
         this.antonym = "antonym";
         this.definations = "defination";
+        this.examples = "example"
     }
 
     async showWordDefinations(word) {
@@ -60,7 +61,20 @@ export default class Controller {
     async showRandomWordDict() {
         let res = await ServicesController.getRandomWord();
         if(res.success){
+            printer.printLine(`\n\nWord is: `.blue + res.data.green);
             await this.showFullDict(res.data);
+        }else{
+            this.printLine(res.data);
+        }
+    }
+
+    async showExamples(word){
+        let res = await ServicesController.getExamples(word);
+        if(res.success){
+            var data = res.data.map(item => {
+                return item.text;
+            });
+            this.print(this.examples, data);
         }else{
             this.printLine(res.data);
         }

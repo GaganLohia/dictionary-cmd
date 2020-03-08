@@ -36,6 +36,20 @@ export default class Services {
         }
     }
 
+    async getExamples(word) {
+        try {
+            spinner.start();
+            const res = await axios.get(`${Constants.HOST}/word/${word}/examples?api_key=${Constants.API_KEY}`)
+            spinner.stop(true);
+            return {
+                success: true,
+                data: res.data.examples
+            };
+        } catch (err) {
+            return this.commonErrorCallback(err);
+        }
+    }
+
     async getRandomWord() {
         try {
             spinner.start();

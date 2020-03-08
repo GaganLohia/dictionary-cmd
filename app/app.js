@@ -21,6 +21,12 @@ commander
     .description("Display Antonyms of a given word.")
     .action((word) => controller.showWordAntonyms(word));
 
+
+commander
+    .command("ex <word>")
+    .description("Display examples of a given word in a sentence.")
+    .action((word) => controller.showExamples(word));
+
 commander
     .arguments("<word>")
     .action((word) => controller.showFullDict(word));
