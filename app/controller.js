@@ -1,6 +1,8 @@
 import Services from "./services"
 import Interactor from "./interactor"
+import Printer from "./printer"
 
+var printer = new Printer();
 var ServicesController = new Services();
 export default class Controller {
     constructor() {
@@ -59,7 +61,7 @@ export default class Controller {
         let res = await ServicesController.getRandomWord();
         if (res.success) {
             let word = res.data;
-            console.log(`\n\nWord of the day is: ${word}`.yellow);
+            printer.printLine(`\n\nWord of the day is: `.blue + word.green);
             await this.showWordDefinations(word);
             await this.showWordSynonyms(word);
             await this.showWordAntonyms(word);
@@ -101,17 +103,16 @@ export default class Controller {
 
     print(heading, data) {
         if (!data || data.length == 0) {
-            console.log(`\n\n${heading.capitalize()}s not found for this word!`.red);
+            printer.printLine(`\n\n${heading.capitalize()}s not found for this word!`.red);
             return;
         }
-        console.log(`\n\n${heading.capitalize()}s for this word are:`.blue);
+        printer.printLine(`\n\n${heading.capitalize()}s for this word are:`.blue);
         data.forEach((item, i) => {
-            console.log(`${i + 1}. ${item}`.green);
+            printer.printLine(`${i + 1}. ${item}`.green);
         });
     }
 
     printLine(str) {
-        console.log(`\n${str}`.red);
+        printer.printLine(`\n${str}`.red);
     }
-
 }

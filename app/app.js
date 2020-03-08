@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import 'babel-polyfill'
 import commander from "commander";
 import Controller from "./controller"

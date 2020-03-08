@@ -10,7 +10,7 @@ export default class Interactor {
         this.antonym = antonym;
         this.synonym = synonym;
         this.originalSynonym = synonym;
-        this.firstStatement = '\n\nPlease guess the word: '.blue;
+        this.firstStatement = '\n\nPlease guess the word: ';
         this.choices = ['1. Try again','2. Give a hint','3. Quit'];
      }
     
@@ -22,10 +22,10 @@ export default class Interactor {
         while(true){
             let ans = await this.promptQuestion(this.firstStatement);
             if(ans.answer == this.word || this.originalSynonym.includes(ans.answer)){
-                console.log("\nYou won the game!!!".green);
+                printer.printLine("\nYou won the game!!!".green);
                 break;
             }else{
-                this.firstStatement = '\n\nPlease guess the word again: '.blue
+                this.firstStatement = '\n\nPlease guess the word again: '
                 let ans = await this.promtOptions();
                 let choice = this.choices.indexOf(ans.answer);
                 if(choice == 1){
@@ -56,10 +56,11 @@ export default class Interactor {
     }
 
     async promptQuestion(question){
+        
         const questionObj = {
             type: 'input',
             name: 'answer',
-            message: question
+            message: question.yellow
         };
         return await prompt(questionObj);
     }
@@ -68,7 +69,7 @@ export default class Interactor {
         const questionObj = {
             type: 'list',
             name: 'answer',
-            message: '\nPlease choose one: ',
+            message: '\nYou have entered a wrong answer.\n'.red+'Please choose one of the options to coninue: '.blue,
             choices: this.choices
         };
         return await prompt(questionObj);
