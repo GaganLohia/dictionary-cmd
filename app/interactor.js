@@ -12,7 +12,6 @@ export default class Interactor {
         this.definations = definations;
         this.antonym = antonym;
         this.synonym = synonym;
-        this.originalSynonym = synonym;
         this.firstStatement = '\n\nPlease guess the word: ';
         this.choices = ['1. Try again','2. Give a hint','3. Quit'];
      }
@@ -24,7 +23,7 @@ export default class Interactor {
         this.printAntonym();
         while(true){
             let ans = await this.promptQuestion(this.firstStatement);
-            if(ans.answer == this.word || this.originalSynonym.includes(ans.answer)){
+            if(ans.answer == this.word || this.synonym.includes(ans.answer)){
                 printer.printLine("\nYou won the game!!!".green);
                 break;
             }else{
