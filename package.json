@@ -12,7 +12,7 @@
   "author": "Gagan Lohia",
   "license": "ISC",
   "dependencies": {
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "babel-polyfill": "^6.26.0",
     "cli-spinner": "^0.2.10",
     "colors": "^1.4.0",
